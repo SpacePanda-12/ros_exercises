@@ -2,6 +2,7 @@
 import math
 
 import rospy
+import numpy as np
 # from geometry_msgs.msg import Twist, Point
 from sensor_msgs.msg import LaserScan
 import random
@@ -18,8 +19,8 @@ def fake_scan_publisher():
     scan.angle_max = (2/3)*math.pi
     scan.angle_increment = (1/300)*math.pi
     scan.scan_time = 1
-    scan.range_min = 1
-    scan.range_max = 10
+    scan.range_min = 1.0
+    scan.range_max = 10.0
 
     # array_length calculated as in below line. Hard coded value to remove style warning
     # array_length = 2*(2/3)*math.pi/(1/300*math.pi)+1
@@ -30,8 +31,8 @@ def fake_scan_publisher():
         array.append(n)
 
     # if autograder says this is wrong, try moving to while loop
-    scan.ranges = array
-
+    scan.ranges = np.asarray(array)
+    
     while not rospy.is_shutdown():
         pub.publish(scan)
         rate.sleep()

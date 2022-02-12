@@ -3,7 +3,7 @@ import math
 
 import rospy
 # from geometry_msgs.msg import Twist, Point
-from sensor_msgs import LaserScan
+from sensor_msgs.msg import LaserScan
 import random
 
 
@@ -34,6 +34,7 @@ def fake_scan_publisher():
     while not rospy.is_shutdown():
         pub.publish(scan)
         rate.sleep()
+
 
 if __name__ == '__main__':
     try:

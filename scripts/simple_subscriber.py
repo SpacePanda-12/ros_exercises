@@ -12,7 +12,6 @@ def callback(data):
     number = math.log(data.data)
     rospy.loginfo(math.log(data.data))
     pub.publish(number)
-    rospy.spin()
 
 
 def simple_subscriber():
@@ -22,4 +21,7 @@ def simple_subscriber():
 
 
 if __name__ == '__main__':
-    simple_subscriber()
+    try:
+        simple_subscriber()
+    except rospy.ROSInterruptException:
+        pass

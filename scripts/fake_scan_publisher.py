@@ -12,7 +12,7 @@ def fake_scan_publisher():
     rospy.init_node('fake_scan_publisher')
     rate = rospy.Rate(20)
     scan = LaserScan()
-    scan.header.timestamp = rospy.get_rostime()
+    scan.header.stamp = rospy.get_rostime()
     scan.header.frame_id = "base_link"
     scan.angle_min = (-2/3)*math.pi
     scan.angle_max = (-2/3)*math.pi

@@ -3,9 +3,7 @@
 import rospy
 import math
 from std_msgs.msg import Float32
-# from geometry_msgs.msg import Twist, Point
-# from sensor_msgs.msg import LaserScan
-import random
+
 pub = rospy.Publisher('random_float_log', Float32, queue_size=10)
 
 def callback(data):

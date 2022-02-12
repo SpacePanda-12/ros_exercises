@@ -2,8 +2,6 @@
 
 import rospy
 from std_msgs.msg import Float32
-# from geometry_msgs.msg import Twist, Point
-# from sensor_msgs.msg import LaserScan
 import random
 
 

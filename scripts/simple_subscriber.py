@@ -11,7 +11,7 @@ pub = rospy.Publisher('random_float_log', Float32, queue_size=10)
 
 
 def callback(data):
-    pub.publish(data)
+    pub.publish(math.log(data))
     rospy.spin()
 
 

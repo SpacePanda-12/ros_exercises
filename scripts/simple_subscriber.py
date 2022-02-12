@@ -6,12 +6,11 @@ from std_msgs.msg import Float32
 # from geometry_msgs.msg import Twist, Point
 # from sensor_msgs.msg import LaserScan
 import random
-
 pub = rospy.Publisher('random_float_log', Float32, queue_size=10)
 
-
 def callback(data):
-    number = float(math.log(data.data))
+    number = math.log(data.data)
+    rospy.loginfo(math.log(data.data))
     pub.publish(number)
     rospy.spin()
 

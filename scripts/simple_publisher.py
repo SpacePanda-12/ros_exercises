@@ -22,13 +22,3 @@ if __name__ == '__main__':
         simple_publisher()
     except rospy.ROSInterruptException:
         pass
-
-
-
-
-
-
-
-
-
-

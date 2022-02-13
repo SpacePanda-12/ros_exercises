@@ -4,6 +4,7 @@ import rospy
 import tf2_ros
 import geometry_msgs.msg
 
+rospy.init_node("tf2_broadcast")
 tfBuffer = tf2_ros.Buffer()
 listener = tf2_ros.TransformListener(tfBuffer)
 r = rospy.Rate(20)
@@ -11,7 +12,6 @@ r = rospy.Rate(20)
 # precomputed transforms for the cameras
 transform_matrix_left = np.array([[1, 0, 0, -0.5], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
 transform_matrix_right = np.array([[1, 0, 0, 0.5], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-rospy.init_node("tf2_broadcast")
 br = tf2_ros.TransformBroadcaster()
 
 

@@ -2,6 +2,7 @@
 import numpy as np
 import rospy
 import tf2_ros
+import tf
 import geometry_msgs.msg
 
 rospy.init_node("tf2_broadcast")
@@ -28,7 +29,7 @@ while not rospy.is_shutdown():
     rotation = transform.transform.rotation
 
     # turn quaternion into rotation matrix
-    rot_matrix = tf2_ros.transformations.quaternion_matrix(rotation)
+    rot_matrix = tf.transformations.quaternion_matrix(rotation)
 
     # create 4x4 transformation matrix
     robot_transform_matrix = np.array([[rot_matrix[0], translation[0]], [rot_matrix[1], translation[1]], [rot_matrix[2], translation[2]], [0, 0, 0, 1]])
@@ -61,7 +62,7 @@ while not rospy.is_shutdown():
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
-    left_to_right_quaternion = tf2_ros.quaternion_from_matrix(np.array([left_to_right_transform[0][0:2], left_to_right_transform[1][0:2], left_to_right_transform[2][0:2]]))
+    left_to_right_quaternion = tf.transformation.quaternion_from_matrix(np.array([left_to_right_transform[0][0:2], left_to_right_transform[1][0:2], left_to_right_transform[2][0:2]]))
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]
 
     left_to_right = geometry_msgs.msg.TransformStamped()

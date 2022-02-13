@@ -34,7 +34,7 @@ while not rospy.is_shutdown():
     rot_matrix = tf.transformations.quaternion_matrix(rotation)
 
     # create 4x4 transformation matrix
-    robot_transform_matrix = np.array([[rot_matrix[0], translation[0]], [rot_matrix[1], translation[1]], [rot_matrix[2], translation[2]], [0, 0, 0, 1]])
+    robot_transform_matrix = np.array([[rot_matrix[0], translation[0]], [rot_matrix[1], translation[1]], [rot_matrix[2], translation[2]], [float(0), float(0), float(0), float(1)]])
 
     # compose world-to-robot then robot-to-left camera to get world-to-left camera
     world_to_left_camera_transform = np.multiply(robot_transform_matrix, transform_matrix_left)
@@ -60,7 +60,7 @@ while not rospy.is_shutdown():
 
 
     # find transformation from left camera to robot. Since no rotation, it's just the opposite translation.
-    left_to_robot_transform = np.array([[1, 0, 0, 0.5], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    left_to_robot_transform = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)

@@ -4,7 +4,7 @@ import rospy
 import math
 from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
-from ros_exercises.msg import OpenSpace.msg
+from ros_exercises.msg import OpenSpace
 global rate
 
 # dist_pub = rospy.Publisher('open_space', distance, queue_size=10)

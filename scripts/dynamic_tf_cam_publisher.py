@@ -11,8 +11,8 @@ listener = tf2_ros.TransformListener(tfBuffer)
 r = rospy.Rate(20)
 
 # precomputed transforms for the cameras
-transform_matrix_left = np.array([[1, 0, 0, -0.5], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-transform_matrix_right = np.array([[1, 0, 0, 0.5], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+transform_matrix_left = np.array([[float(1), float(0), float(0), float(-0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
+transform_matrix_right = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 br = tf2_ros.TransformBroadcaster()
 
 
@@ -26,10 +26,10 @@ while not rospy.is_shutdown():
         continue
 
     translation = transform.transform.translation
-    translation = np.array([translation.x, translation.y, translation.z])
+    translation = np.array([float(translation.x), float(translation.y), float(translation.z)])
     rotation = transform.transform.rotation
-    rotation = np.array([rotation.x, rotation.y, rotation.z, rotation.w])
-    
+    rotation = np.array([float(rotation.x), float(rotation.y), float(rotation.z), float(rotation.w)])
+
     # turn quaternion into rotation matrix
     rot_matrix = tf.transformations.quaternion_matrix(rotation)
 

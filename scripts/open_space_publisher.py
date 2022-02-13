@@ -9,7 +9,7 @@ global rate
 
 # dist_pub = rospy.Publisher('open_space', distance, queue_size=10)
 # angle_pub = rospy.Publisher('open_space', angle, queue_size=10)
-publisher_topic = rospy.get_param('/open_space_publisher_topic')
+publisher_topic = rospy.get_param('/open_space_publish_topic')
 subscriber_topic = rospy.get_param('/open_space_subscriber_topic')
 # pub = rospy.Publisher('open_space', OpenSpace, queue_size=10)
 pub = rospy.Publisher(publisher_topic, OpenSpace, queue_size=10)

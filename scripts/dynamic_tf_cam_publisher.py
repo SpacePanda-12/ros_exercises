@@ -18,7 +18,7 @@ br = tf2_ros.TransformBroadcaster()
 while not rospy.is_shutdown():
 
     # fetch transform from world to base_link
-    (translation, rotation) = tfBuffer.lookup_transform("world", "base_link_gt", rospy.Time())
+    (translation, rotation) = tfBuffer.lookup_transform("base_link_gt", "world", rospy.Time())
 
     # turn quaternion into rotation matrix
     rot_matrix = tf2_ros.transformations.quaternion_matrix(rotation)

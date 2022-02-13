@@ -7,13 +7,13 @@ import numpy as np
 from sensor_msgs.msg import LaserScan
 import random
 
-publisher_node_topic = rospy.get_param('fake_scan_publish_topic')
-r = rospy.get_param('publish_rate')
-angle_min = rospy.get_param('angle_min')
-angle_max = rospy.get_param('angle_max')
-range_min = rospy.get_param('range_min')
-range_max = rospy.get_param('range_max')
-angle_increment = rospy.get_param('angle_increment')
+publisher_node_topic = rospy.get_param('/fake_scan_publish_topic')
+r = rospy.get_param('/publish_rate')
+angle_min = rospy.get_param('/angle_min')
+angle_max = rospy.get_param('/angle_max')
+range_min = rospy.get_param('/range_min')
+range_max = rospy.get_param('/range_max')
+angle_increment = rospy.get_param('/angle_increment')
 
 
 def fake_scan_publisher():

@@ -4,10 +4,12 @@ import rospy
 import math
 from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
+from OpenSpace.msg import distance
+from OpenSpace.msg import angle
 global rate
 
-dist_pub = rospy.Publisher('open_space/distance', Float32, queue_size=10)
-angle_pub = rospy.Publisher('open_space/angle', Float32, queue_size=10)
+dist_pub = rospy.Publisher('open_space', distance, queue_size=10)
+angle_pub = rospy.Publisher('open_space', angle, queue_size=10)
 
 
 

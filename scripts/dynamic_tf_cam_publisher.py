@@ -4,8 +4,6 @@ import rospy
 import tf2_ros
 import geometry_msgs.msg
 
-rospy.init_node("tf2_broadcast_demo")
-
 tfBuffer = tf2_ros.Buffer()
 listener = tf2_ros.TransformListener(tfBuffer)
 r = rospy.Rate(20)

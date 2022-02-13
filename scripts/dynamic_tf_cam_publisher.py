@@ -19,11 +19,12 @@ while not rospy.is_shutdown():
 
     # fetch transform from world to base_link
     try:
-        tf2_ros.waitForTransform("world", "base_link_gt", rospy.Time())
+        tf2_ros.tfBuffer.lookup_transform("world", "base_link_gt", rospy.Time())
         (translation, rotation) = tfBuffer.lookup_transform("world", "base_link_gt", rospy.Time())
     except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
         r.sleep()
-    
+        continue
+
     # turn quaternion into rotation matrix
     rot_matrix = tf2_ros.transformations.quaternion_matrix(rotation)
 

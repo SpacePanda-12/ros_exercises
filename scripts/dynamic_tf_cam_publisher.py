@@ -26,8 +26,10 @@ while not rospy.is_shutdown():
         continue
 
     translation = transform.transform.translation
+    translation = np.array([translation.x, translation.y, translation.z])
     rotation = transform.transform.rotation
-
+    rotation = np.array([rotation.x, rotation.y, rotation.z, rotation.w])
+    
     # turn quaternion into rotation matrix
     rot_matrix = tf.transformations.quaternion_matrix(rotation)
 

@@ -18,7 +18,7 @@ def fake_scan_publisher():
     scan.angle_min = float(-2)/3*np.pi
     scan.angle_max = float(2)/3*np.pi
     scan.angle_increment = float(1)/300*np.pi
-    scan.scan_time = 1.0
+    scan.scan_time = 20.0
     scan.range_min = 1.0
     scan.range_max = 10.0
 

@@ -3,5 +3,15 @@
 <node pkg="ros_exercises" type="simple_subscriber.py" name="simple_subscriber.py" output="screen"/>
 <node pkg="ros_exercises" type="fake_scan_publisher.py" name="fake_scan_publisher.py" output="screen"/>
 <node pkg="ros_exercises" type="open_space_publisher.py" name="open_space_publisher.py" output="screen"/>
+<param name="fake_scan_publish_topic" type="String" value="fake_scan" />
+<param name="publish_rate" type="int" value="20" />
+<param name="angle_min" type="float32" value="-2.0943951024" />
+<param name="angle_max" type="float32" value="2.0943951024" />
+<param name="angle_increment" type="float32" value="0.0104719755" />
+<param name="range_min" type="float32" value="1.0" />
+<param name="range_max" type="float32" value="10.0" />
+<param name="open_space_publish_topic" type="String" value="open_space" />
+<param name="open_space_subscriber_topic" type="String" value="fake_scan" />
+
 
 </launch>

@@ -7,20 +7,42 @@ import numpy as np
 from sensor_msgs.msg import LaserScan
 import random
 
+publisher_node_topic = rospy.get_param('/fake_scan_publish_topic')
+r = rospy.get_param('/publish_rate')
+angle_min = rospy.get_param('/angle_min')
+angle_max = rospy.get_param('/angle_max')
+range_min = rospy.get_param('/range_min')
+range_max = rospy.get_param('/range_max')
+angle_increment = rospy.get_param('/angle_increment')
+
 
 def fake_scan_publisher():
-    pub = rospy.Publisher('fake_scan', LaserScan, queue_size=10)
+    # pub = rospy.Publisher('fake_scan', LaserScan, queue_size=10)
+    pub = rospy.Publisher(publisher_node_topic, LaserScan, queue_size=10)
+
     rospy.init_node('fake_scan_publisher')
-    rate = rospy.Rate(20)
+    rate = rospy.Rate(r)
     scan = LaserScan()
     scan.header.stamp = rospy.get_rostime()
     scan.header.frame_id = "base_link"
-    scan.angle_min = float(-2)/3*np.pi
-    scan.angle_max = float(2)/3*np.pi
-    scan.angle_increment = float(1)/300*np.pi
+    scan.angle_min = angle_min
+    scan.angle_max = angle_max
+    scan.angle_increment = angle_increment
     scan.scan_time = 20.0
-    scan.range_min = 1.0
-    scan.range_max = 10.0
+    scan.range_min = range_min
+    scan.range_max = range_max
+
+    # rospy.init_node('fake_scan_publisher')
+    # rate = rospy.Rate(20)
+    # scan = LaserScan()
+    # scan.header.stamp = rospy.get_rostime()
+    # scan.header.frame_id = "base_link"
+    # scan.angle_min = float(-2)/3*np.pi
+    # scan.angle_max = float(2)/3*np.pi
+    # scan.angle_increment = float(1)/300*np.pi
+    # scan.scan_time = 20.0
+    # scan.range_min = 1.0
+    # scan.range_max = 10.0
 
     # array_length calculated as in below line. Hard coded value to remove style warning
     # array_length = 2*(2/3)*math.pi/(1/300*math.pi)+1

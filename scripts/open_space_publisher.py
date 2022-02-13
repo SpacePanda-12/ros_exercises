@@ -9,9 +9,10 @@ global rate
 
 # dist_pub = rospy.Publisher('open_space', distance, queue_size=10)
 # angle_pub = rospy.Publisher('open_space', angle, queue_size=10)
-pub = rospy.Publisher('open_space', OpenSpace, queue_size=10)
-
-
+publisher_topic = rospy.get_param('/open_space_publisher_topic')
+subscriber_topic = rospy.get_param('/open_space_subscriber_topic')
+# pub = rospy.Publisher('open_space', OpenSpace, queue_size=10)
+pub = rospy.Publisher(publisher_topic, OpenSpace, queue_size=10)
 
 def callback(data):
     index = data.ranges.index(max(data.ranges), 0, len(data.ranges))
@@ -32,7 +33,8 @@ def simple_subscriber():
     global rate
     rospy.init_node('open_space_publisher')
     rate = rospy.Rate(20)
-    rospy.Subscriber("fake_scan", LaserScan, callback)
+    # rospy.Subscriber("fake_scan", LaserScan, callback)
+    rospy.Subscriber(subscriber_topic, LaserScan, callback)
     rospy.spin()
 
 

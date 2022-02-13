@@ -1,17 +1,13 @@
 #!/usr/bin/env python
 import numpy as np
 import rospy
-import math
-from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
 from ros_exercises.msg import OpenSpace
 global rate
 
-# dist_pub = rospy.Publisher('open_space', distance, queue_size=10)
-# angle_pub = rospy.Publisher('open_space', angle, queue_size=10)
-publisher_topic = rospy.get_param('/open_space_publish_topic')
-subscriber_topic = rospy.get_param('/open_space_subscriber_topic')
-# pub = rospy.Publisher('open_space', OpenSpace, queue_size=10)
+publisher_topic = rospy.get_param('/open_space_publish_topic', 'open_space')
+subscriber_topic = rospy.get_param('/open_space_subscriber_topic', 'fake_scan')
+
 pub = rospy.Publisher(publisher_topic, OpenSpace, queue_size=10)
 
 def callback(data):
@@ -21,11 +17,6 @@ def callback(data):
     msg.angle = angle
     msg.distance = max(data.ranges)
     pub.publish(msg)
-    # dist_pub.publish(max(data.ranges))
-    # angle_pub.publish(angle)
-    # rospy.loginfo(max(data.ranges))
-    # rospy.loginfo(angle)
-
     rate.sleep()
 
 
@@ -33,7 +24,6 @@ def simple_subscriber():
     global rate
     rospy.init_node('open_space_publisher')
     rate = rospy.Rate(20)
-    # rospy.Subscriber("fake_scan", LaserScan, callback)
     rospy.Subscriber(subscriber_topic, LaserScan, callback)
     rospy.spin()
 

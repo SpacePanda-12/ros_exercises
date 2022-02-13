@@ -37,6 +37,8 @@ while not rospy.is_shutdown():
     robot_transform_matrix = np.array([[rot_matrix[0], translation[0]], [rot_matrix[1], translation[1]], [rot_matrix[2], translation[2]], [float(0), float(0), float(0), float(1)]])
 
     # compose world-to-robot then robot-to-left camera to get world-to-left camera
+    rospy.loginfo(robot_transform_matrix)
+    rospy.loginfo(transform_matrix_left)
     world_to_left_camera_transform = np.multiply(robot_transform_matrix, transform_matrix_left)
 
     world_to_left_transform = geometry_msgs.msg.TransformStamped()
@@ -56,8 +58,6 @@ while not rospy.is_shutdown():
     world_to_left_transform.transform.rotation.y = world_to_left_quaternion[1]
     world_to_left_transform.transform.rotation.z = world_to_left_quaternion[2]
     world_to_left_transform.transform.rotation.w = world_to_left_quaternion[3]
-
-
 
     # find transformation from left camera to robot. Since no rotation, it's just the opposite translation.
     left_to_robot_transform = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])

@@ -15,10 +15,10 @@ def fake_scan_publisher():
     scan = LaserScan()
     scan.header.stamp = rospy.get_rostime()
     scan.header.frame_id = "base_link"
-    scan.angle_min = (-2/3)*math.pi
-    scan.angle_max = (2/3)*math.pi
-    scan.angle_increment = (1/300)*math.pi
-    scan.scan_time = 1
+    scan.angle_min = float(-2)/3*np.pi
+    scan.angle_max = float(2)/3*np.pi
+    scan.angle_increment = float(1)/300*np.pi
+    scan.scan_time = 1.0
     scan.range_min = 1.0
     scan.range_max = 10.0
 
@@ -32,7 +32,7 @@ def fake_scan_publisher():
 
     # if autograder says this is wrong, try moving to while loop
     scan.ranges = np.asarray(array)
-    
+
     while not rospy.is_shutdown():
         pub.publish(scan)
         rate.sleep()

@@ -13,9 +13,10 @@ angle_pub = rospy.Publisher('open_space/angle', Float32, queue_size=10)
 
 def callback(data):
     index = data.ranges.index(max(data.ranges), 0, len(data.ranges))
-    angle = float(-2)/3*np.pi - float(index) * float(1)/300*np.pi
+    angle = float(-2)/3*np.pi + float(index) * float(1)/300*np.pi
     dist_pub.publish(max(data.ranges))
     angle_pub.publish(angle)
+    rospy.loginfo(len(data.ranges))
     # rospy.loginfo(max(data.ranges))
     # rospy.loginfo(angle)
     rate.sleep()

@@ -1,5 +1,5 @@
-Float32 angle
-Float32 distance
+float32 angle
+float32 distance
 
 
 

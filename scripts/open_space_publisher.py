@@ -7,7 +7,7 @@ from sensor_msgs.msg import LaserScan
 
 dist_pub = rospy.Publisher('open_space/distance', Float32, queue_size=10)
 angle_pub = rospy.Publisher('open_space/angle', Float32, queue_size=10)
-rate = rospy.Rate(20)
+
 
 
 def callback(data):
@@ -18,6 +18,7 @@ def callback(data):
 
 def simple_subscriber():
     rospy.init_node('open_space_publisher')
+    rate = rospy.Rate(20)
     rospy.Subscriber("fake_scan", LaserScan, callback)
     rospy.spin()
 

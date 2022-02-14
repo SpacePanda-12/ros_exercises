@@ -52,7 +52,7 @@ while not rospy.is_shutdown():
     world_to_left_transform.transform.translation.z = transform_matrix_left[2][3]
 
     # left cam rotations
-    world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2], transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2], transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]))
+    world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2]], [transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2]], [transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]]))
 
     world_to_left_transform.transform.rotation.x = world_to_left_quaternion[0]
     world_to_left_transform.transform.rotation.y = world_to_left_quaternion[1]
@@ -64,7 +64,7 @@ while not rospy.is_shutdown():
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
-    left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2], left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2], left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]))
+    left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]
 
     left_to_right = geometry_msgs.msg.TransformStamped()

@@ -34,7 +34,7 @@ while not rospy.is_shutdown():
     rot_matrix = tf.transformations.quaternion_matrix(rotation)
 
     # create 4x4 transformation matrix
-    robot_transform_matrix = np.array([[rot_matrix[0], translation[0]], [rot_matrix[1], translation[1]], [rot_matrix[2], translation[2]], [float(0), float(0), float(0), float(1)]])
+    robot_transform_matrix = [[rot_matrix[0][0], rot_matrix[0][1], rot_matrix[0][2], translation[0]], [rot_matrix[1][0], rot_matrix[1][1], rot_matrix[1][2], translation[1]], [rot_matrix[2][0], rot_matrix[2][1], rot_matrix[2][2], translation[2]], [float(0), float(0), float(0), float(1)]]
 
     # compose world-to-robot then robot-to-left camera to get world-to-left camera
     rospy.loginfo(robot_transform_matrix)

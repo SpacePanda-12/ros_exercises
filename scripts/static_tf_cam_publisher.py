@@ -22,8 +22,8 @@ def static_publish():
 
     robot_to_left = geometry_msgs.msg.TransformStamped()
     robot_to_left.header.stamp = rospy.Time.now()
-    robot_to_left.header.frame_id = "left_cam"
-    robot_to_left.child_frame_id = "base_link_gt"
+    robot_to_left.header.frame_id = "base_link_gt"
+    robot_to_left.child_frame_id = "left_cam"
 
     # left cam translations
     robot_to_left.transform.translation.x = robot_to_left_translation[0]

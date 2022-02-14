@@ -165,6 +165,8 @@ catkin_install_python(PROGRAMS
     scripts/simple_subscriber.py
     scripts/fake_scan_publisher.py
     scripts/open_space_publisher.py
+    scripts/dynamic_tf_cam_publisher.py
+    scripts/static_tf_cam_publisher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

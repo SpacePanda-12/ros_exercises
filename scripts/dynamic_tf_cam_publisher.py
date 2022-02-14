@@ -52,8 +52,8 @@ while not rospy.is_shutdown():
     world_to_left_transform.transform.translation.z = transform_matrix_left[2][3]
 
     # left cam rotations
-    world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2]], [transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2]], [transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]]))
-
+    # world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2]], [transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2]], [transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]]))
+    world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[1,2,3],[4,5,6],[7,8,9]]))
     world_to_left_transform.transform.rotation.x = world_to_left_quaternion[0]
     world_to_left_transform.transform.rotation.y = world_to_left_quaternion[1]
     world_to_left_transform.transform.rotation.z = world_to_left_quaternion[2]

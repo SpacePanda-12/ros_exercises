@@ -58,7 +58,6 @@ def static_publish():
 
     br.sendTransform([robot_to_right, robot_to_left])
     # br.sendTransform(robot_to_left)
-    rospy.spin()
 
 if __name__ == '__main__':
     try:

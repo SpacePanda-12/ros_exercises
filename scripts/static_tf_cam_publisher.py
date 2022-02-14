@@ -5,8 +5,7 @@ import tf2_ros
 import tf
 import geometry_msgs.msg
 
-
-if __name__ == '__main__':
+def static_publish()
     rospy.init_node("tf2_static_broadcast")
     br = tf2_ros.StaticTransformBroadcaster()
 
@@ -57,5 +56,11 @@ if __name__ == '__main__':
     # robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
     # robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
 
-    br.sendTransform(robot_to_left)
-    rospy.spin()
+    while not rospy.is_shutdown():
+        br.sendTransform(robot_to_left)
+        
+if __name__ == '__main__':
+    try:
+        static_publish()
+    except rospy.ROSInterruptException:
+        pass

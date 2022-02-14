@@ -43,12 +43,12 @@ while not rospy.is_shutdown():
     base_to_world_transform.header.frame_id = "base_link_gt_2"
 
     # left cam translations
-    base_to_world_transform.transform.translation.x = base_to_world_transform[0][3]
-    base_to_world_transform.transform.translation.y = base_to_world_transform[1][3]
-    base_to_world_transform.transform.translation.z = base_to_world_transform[2][3]
+    base_to_world_transform.transform.translation.x = base_to_world[0][3]
+    base_to_world_transform.transform.translation.y = base_to_world[1][3]
+    base_to_world_transform.transform.translation.z = base_to_world[2][3]
 
     # left cam rotations
-    base_to_world_quaternion = tf.transformations.quaternion_from_matrix(base_to_world_transform)
+    base_to_world_quaternion = tf.transformations.quaternion_from_matrix(base_to_world)
     base_to_world_transform.transform.rotation.x = base_to_world_quaternion[0]
     base_to_world_transform.transform.rotation.y = base_to_world_quaternion[1]
     base_to_world_transform.transform.rotation.z = base_to_world_quaternion[2]

@@ -31,7 +31,7 @@ while not rospy.is_shutdown():
     rotation = np.array([float(rotation.x), float(rotation.y), float(rotation.z), float(rotation.w)])
 
     # turn quaternion into rotation matrix
-    rot_matrix = tf2_ros.transformations.quaternion_matrix(rotation)
+    rot_matrix = tf.transformations.quaternion_matrix(rotation)
 
     # create 4x4 transformation matrix
     robot_transform_matrix = [[rot_matrix[0][0], rot_matrix[0][1], rot_matrix[0][2], translation[0]], [rot_matrix[1][0], rot_matrix[1][1], rot_matrix[1][2], translation[1]], [rot_matrix[2][0], rot_matrix[2][1], rot_matrix[2][2], translation[2]], [float(0), float(0), float(0), float(1)]]
@@ -53,7 +53,7 @@ while not rospy.is_shutdown():
 
     # left cam rotations
     # world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2]], [transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2]], [transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]]))
-    world_to_left_quaternion = tf2_ros.transformations.quaternion_from_matrix(transform_matrix_left)
+    world_to_left_quaternion = tf.transformations.quaternion_from_matrix(transform_matrix_left)
     world_to_left_transform.transform.rotation.x = world_to_left_quaternion[0]
     world_to_left_transform.transform.rotation.y = world_to_left_quaternion[1]
     world_to_left_transform.transform.rotation.z = world_to_left_quaternion[2]
@@ -65,7 +65,7 @@ while not rospy.is_shutdown():
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
     # left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
-    left_to_right_quaternion = tf2_ros.transformations.quaternion_from_matrix(left_to_right_transform)
+    left_to_right_quaternion = tf.transformations.quaternion_from_matrix(left_to_right_transform)
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]
 
     left_to_right = geometry_msgs.msg.TransformStamped()

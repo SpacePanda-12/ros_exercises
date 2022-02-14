@@ -37,25 +37,26 @@ def static_publish():
     robot_to_left.transform.rotation.w = robot_to_left_quaternion[3]
 
     # right cam trans plus rot
-    # robot_to_right_quaternion = tf.transformations.quaternion_from_matrix(transform_matrix_right)
-    # robot_to_right_translation = np.array([transform_matrix_right[0][3], transform_matrix_right[1][3], transform_matrix_right[2][3]])
-    #
-    # robot_to_right = geometry_msgs.msg.TransformStamped()
-    # robot_to_right.header.stamp = rospy.Time.now()
-    # robot_to_right.header.frame_id = "right_cam"
-    # robot_to_right.child_frame_id = "base_link_gt"
-    #
-    # # right cam translations
-    # robot_to_right.transform.translation.x = robot_to_right_translation[0]
-    # robot_to_right.transform.translation.y = robot_to_right_translation[1]
-    # robot_to_right.transform.translation.z = robot_to_right_translation[2]
-    #
-    # # right cam rotations
-    # robot_to_right.transform.rotation.x = robot_to_right_quaternion[0]
-    # robot_to_right.transform.rotation.y = robot_to_right_quaternion[1]
-    # robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
-    # robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
+    robot_to_right_quaternion = tf.transformations.quaternion_from_matrix(transform_matrix_right)
+    robot_to_right_translation = np.array([transform_matrix_right[0][3], transform_matrix_right[1][3], transform_matrix_right[2][3]])
 
+    robot_to_right = geometry_msgs.msg.TransformStamped()
+    robot_to_right.header.stamp = rospy.Time.now()
+    robot_to_right.header.frame_id = "right_cam"
+    robot_to_right.child_frame_id = "base_link_gt"
+
+    # right cam translations
+    robot_to_right.transform.translation.x = robot_to_right_translation[0]
+    robot_to_right.transform.translation.y = robot_to_right_translation[1]
+    robot_to_right.transform.translation.z = robot_to_right_translation[2]
+
+    # right cam rotations
+    robot_to_right.transform.rotation.x = robot_to_right_quaternion[0]
+    robot_to_right.transform.rotation.y = robot_to_right_quaternion[1]
+    robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
+    robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
+
+    br.sendTransform(robot_to_right)
     br.sendTransform(robot_to_left)
     rospy.spin()
 

@@ -5,7 +5,7 @@ import tf2_ros
 import tf
 import geometry_msgs.msg
 
-def static_publish()
+def static_publish():
     rospy.init_node("tf2_static_broadcast")
     br = tf2_ros.StaticTransformBroadcaster()
 
@@ -58,7 +58,7 @@ def static_publish()
 
     while not rospy.is_shutdown():
         br.sendTransform(robot_to_left)
-        
+
 if __name__ == '__main__':
     try:
         static_publish()

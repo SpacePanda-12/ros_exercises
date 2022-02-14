@@ -63,6 +63,7 @@ def static_publish():
 if __name__ == '__main__':
     try:
         static_publish()
+        rospy.loginfo("pass")
         pass
     except rospy.ROSInterruptException:
         pass

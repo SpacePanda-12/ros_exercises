@@ -43,7 +43,7 @@ while not rospy.is_shutdown():
 
     world_to_left_transform = geometry_msgs.msg.TransformStamped()
     world_to_left_transform.header.stamp = rospy.Time.now()
-    world_to_left_transform.header.frame_id = "base_link_gt"
+    world_to_left_transform.header.frame_id = "world"
     world_to_left_transform.child_frame_id = "left_cam"
 
     # left cam translations

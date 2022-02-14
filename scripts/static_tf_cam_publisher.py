@@ -5,10 +5,7 @@ import tf2_ros
 import tf
 import geometry_msgs.msg
 
-rospy.init_node("tf2_broadcast")
-tfBuffer = tf2_ros.Buffer()
-listener = tf2_ros.TransformListener(tfBuffer)
-r = rospy.Rate(20)
+rospy.init_node("tf2_static_broadcast")
 
 # precomputed transforms for the cameras
 transform_matrix_left_from_robot = np.array([[float(1), float(0), float(0), float(-0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
@@ -58,5 +55,5 @@ robot_to_right.transform.rotation.y = robot_to_right_quaternion[1]
 robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
 robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
 
-br.sendTransform(robot_to_left)
-br.sendTransform(robot_to_right)
+br.sendTransform([robot_to_left, robot_to_right])
+

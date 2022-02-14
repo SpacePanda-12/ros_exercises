@@ -37,7 +37,7 @@ while not rospy.is_shutdown():
     robot_transform_matrix = [[rot_matrix[0][0], rot_matrix[0][1], rot_matrix[0][2], translation[0]], [rot_matrix[1][0], rot_matrix[1][1], rot_matrix[1][2], translation[1]], [rot_matrix[2][0], rot_matrix[2][1], rot_matrix[2][2], translation[2]], [float(0), float(0), float(0), float(1)]]
 
     # compose world-to-robot then robot-to-left camera to get world-to-left camera
-    world_to_left_camera_transform = np.dot(robot_transform_matrix, transform_matrix_left)
+    world_to_left_camera_transform = np.multiply(robot_transform_matrix, transform_matrix_left)
 
     world_to_left_transform = geometry_msgs.msg.TransformStamped()
     world_to_left_transform.header.stamp = rospy.Time.now()
@@ -50,7 +50,6 @@ while not rospy.is_shutdown():
     world_to_left_transform.transform.translation.z = world_to_left_camera_transform[2][3]
 
     # left cam rotations
-    # world_to_left_quaternion = tf.transformations.quaternion_from_matrix(np.array([[transform_matrix_left[0][0], transform_matrix_left[0][1], transform_matrix_left[0][2]], [transform_matrix_left[1][0], transform_matrix_left[1][1], transform_matrix_left[1][2]], [transform_matrix_left[2][0], transform_matrix_left[2][1], transform_matrix_left[2][2]]]))
     world_to_left_quaternion = tf.transformations.quaternion_from_matrix(world_to_left_camera_transform)
     world_to_left_transform.transform.rotation.x = world_to_left_quaternion[0]
     world_to_left_transform.transform.rotation.y = world_to_left_quaternion[1]
@@ -61,8 +60,7 @@ while not rospy.is_shutdown():
     left_to_robot_transform = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
-    left_to_right_transform = np.dot(left_to_robot_transform, transform_matrix_right)
-    # left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
+    left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
     left_to_right_quaternion = tf.transformations.quaternion_from_matrix(left_to_right_transform)
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]
 

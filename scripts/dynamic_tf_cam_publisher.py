@@ -71,7 +71,7 @@ while not rospy.is_shutdown():
     left_to_right = geometry_msgs.msg.TransformStamped()
     left_to_right.header.stamp = rospy.Time.now()
     left_to_right.header.frame_id = "left_cam"
-    left_to_right.header.child_frame_id = "right_cam"
+    left_to_right.child_frame_id = "right_cam"
 
     # right cam translations
     left_to_right.transform.translation.x = left_to_right_translation[0]

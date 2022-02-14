@@ -57,7 +57,7 @@ while not rospy.is_shutdown():
     world_to_left_transform.transform.rotation.w = world_to_left_quaternion[3]
 
     # find transformation from left camera to robot. Since no rotation, it's just the opposite translation.
-    left_to_robot_transform = np.array([[float(1), float(0), float(0), float(-2.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
+    left_to_robot_transform = np.array([[float(1), float(0), float(0), float(2.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.dot(left_to_robot_transform, transform_matrix_right)

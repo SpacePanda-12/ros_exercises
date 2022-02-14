@@ -11,8 +11,8 @@ listener = tf2_ros.TransformListener(tfBuffer)
 r = rospy.Rate(20)
 
 # precomputed transforms for the cameras
-transform_matrix_left = np.array([[float(1), float(0), float(0), float(-0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
-transform_matrix_right = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
+transform_matrix_left = np.array([[float(1), float(0), float(0), float(-2.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
+transform_matrix_right = np.array([[float(1), float(0), float(0), float(2.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 br = tf2_ros.TransformBroadcaster()
 
 
@@ -61,7 +61,7 @@ while not rospy.is_shutdown():
     left_to_robot_transform = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
-    left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
+    left_to_right_transform = np.dot(left_to_robot_transform, transform_matrix_right)
     # left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
     left_to_right_quaternion = tf.transformations.quaternion_from_matrix(left_to_right_transform)
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]

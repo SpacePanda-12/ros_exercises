@@ -64,7 +64,8 @@ while not rospy.is_shutdown():
 
     # compose inverse(robot-to-left) = left-to-robot with robot-to-right to get left-to-right transform
     left_to_right_transform = np.multiply(left_to_robot_transform, transform_matrix_right)
-    left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
+    # left_to_right_quaternion = tf.transformations.quaternion_from_matrix(np.array([[left_to_right_transform[0][0], left_to_right_transform[0][1], left_to_right_transform[0][2]], [left_to_right_transform[1][0], left_to_right_transform[1][1], left_to_right_transform[1][2]], [left_to_right_transform[2][0], left_to_right_transform[2][1], left_to_right_transform[2][2]]]))
+    left_to_right_quaternion = tf.transformations.quaternion_from_matrix(left_to_right_transform)
     left_to_right_translation = [left_to_right_transform[0][3], left_to_right_transform[1][3], left_to_right_transform[2][3]]
 
     left_to_right = geometry_msgs.msg.TransformStamped()

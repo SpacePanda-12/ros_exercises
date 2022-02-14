@@ -58,5 +58,8 @@ robot_to_right.transform.rotation.y = robot_to_right_quaternion[1]
 robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
 robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
 
-br.sendTransform(robot_to_left)
-br.sendTransform(robot_to_right)
+while not rospy.is_shutdown()
+    br.sendTransform(robot_to_left)
+    br.sendTransform(robot_to_right)
+
+    r.sleep()

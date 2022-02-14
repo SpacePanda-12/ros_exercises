@@ -56,8 +56,8 @@ def static_publish():
     robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
     robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
 
-    br.sendTransform(robot_to_right)
-    br.sendTransform(robot_to_left)
+    br.sendTransform([robot_to_right, robot_to_left])
+    # br.sendTransform(robot_to_left)
     rospy.spin()
 
 if __name__ == '__main__':

@@ -13,7 +13,7 @@ r = rospy.Rate(20)
 # precomputed transforms for the cameras
 transform_matrix_left_from_robot = np.array([[float(1), float(0), float(0), float(-0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 transform_matrix_right_from_robot = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
-br = tf2_ros.TransformBroadcaster()
+br = tf2_ros.StaticTransformBroadcaster()
 
 transform_matrix_left = np.array([[float(1), float(0), float(0), float(0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
 transform_matrix_right = np.array([[float(1), float(0), float(0), float(-0.5)], [float(0), float(1), float(0), float(0)], [float(0), float(0), float(1), float(0)], [float(0), float(0), float(0), float(1)]])
@@ -58,8 +58,5 @@ robot_to_right.transform.rotation.y = robot_to_right_quaternion[1]
 robot_to_right.transform.rotation.z = robot_to_right_quaternion[2]
 robot_to_right.transform.rotation.w = robot_to_right_quaternion[3]
 
-while not rospy.is_shutdown():
-    br.sendTransform(robot_to_left)
-    br.sendTransform(robot_to_right)
-
-    r.sleep()
+br.sendTransform(robot_to_left)
+br.sendTransform(robot_to_right)
